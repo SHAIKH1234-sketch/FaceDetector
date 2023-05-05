@@ -64,10 +64,9 @@ def videoCapture():
             gender=genderList[genderPreds[0].argmax()]
             ageNet.setInput(blob)
             agePreds=ageNet.forward()
-            age=ageList[agePreds[0].argmax()]
-            emotion_labels = ['Angry','Disgust','Happy','Neutral', 'Sad','Fear', 'Surprise']
+            
             imotion=emotion_labels[np.random.randint(len(emotion_labels)-1)]
-            cv2.putText(resultImg, f'{gender}, {age}, {imotion}', (faceBox[0], faceBox[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,255), 2, cv2.LINE_AA)
+            cv2.putText(resultImg, f'{gender}, {age}', (faceBox[0], faceBox[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,255), 2, cv2.LINE_AA)
             cv2.imshow("Detecting age and gender", resultImg)
         if cv2.waitKey(1) & 0xFF == ord('e'):
-            return gender,age[1:-1],imotion
+            return gender,age[1:-1]
